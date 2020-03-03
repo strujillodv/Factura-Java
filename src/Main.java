@@ -1,4 +1,9 @@
 
+import DataBase.ConnectionDB;
+import DataBase.CRUD;
+import java.sql.SQLException;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,10 +20,14 @@ public class Main {
      * @param args the command line arguments
      */    
     
-    public static void main(String[] args) {        
-        Data data = new Data();      
-        MainFrame login = new MainFrame();
-        login.setVisible(true);
+    public static void main(String[] args) throws SQLException {        
+//        Data data = new Data();      
+//        MainFrame login = new MainFrame();
+//        login.setVisible(true);
+        
+        CRUD io = new CRUD();
+        io.getQuery("SELECT * FROM Users");
+        
     }
     
 }

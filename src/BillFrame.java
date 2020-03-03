@@ -227,6 +227,7 @@ public final class BillFrame extends JFrame {
         total = "$ " + suma;
         return total;
     }
+    
     public void setProducs() {
         
         for(int i=0; i < Variables.products.size(); i++) {
