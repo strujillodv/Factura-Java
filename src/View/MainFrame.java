@@ -130,7 +130,7 @@ public class MainFrame extends JFrame {
                 int response = login.loginUser();
                 
                 if (response >= 0) {
-                    //Variables.title = Variables.cashiers.get(response).getFirstName();
+                    Variables.title = Variables.cashiers.get(response).getName();
                     Variables.img = Variables.cashiers.get(response).getImg();
                     Variables.user = response;
                     MainFrame userFrame = new MainFrame();

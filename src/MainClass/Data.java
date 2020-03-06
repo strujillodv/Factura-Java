@@ -4,8 +4,6 @@ import DataBase.Bills;
 import DataBase.Products;
 import DataBase.Users;
 import Model.Cashier;
-import Model.Product;
-import Model.User;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

@@ -79,7 +79,7 @@ public class Bills extends ConnectionDB {
                     listProduct.add(new ItemBill(codigo, nameProduct, cantidad, valorUnitario, totalNeto, totalIva, totalItem));
                 }
                 
-                String [][] list = new String[listProduct.size()][6];
+                String [][] list = new String[listProduct.size()][7];
                 
                 for(int i=0; i < listProduct.size(); i++) {
                     list[i][0] = listProduct.get(i).getCodigo();
