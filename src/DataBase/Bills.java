@@ -120,9 +120,9 @@ public class Bills extends ConnectionDB {
             
             ps = getConnectionDB().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
-            ps.setInt(1, number);
-            ps.setInt(2, idUser);
-            ps.setInt(3, idStore);
+            ps.setInt(1, idUser);
+            ps.setInt(2, idStore);
+            ps.setInt(3, number);
             ps.setInt(4, total);
             
             int res = ps.executeUpdate();
@@ -130,7 +130,8 @@ public class Bills extends ConnectionDB {
             
             if (generatedKeys.next()) {
                 
-                int idGenerado = generatedKeys.getInt(1);                     
+                int idGenerado = generatedKeys.getInt(1);
+                System.out.println(idGenerado);
                 setItemsBill(idGenerado, list);
                      
             }
