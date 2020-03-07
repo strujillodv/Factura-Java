@@ -157,7 +157,7 @@ public final class BillFrame extends JFrame {
                 
         searchUser.setBounds(290,20,150,25);
         fisrtNameTitle.setBounds(10,60,120,25);
-        number.setBounds(650,20,100, 80);
+        number.setBounds(670,20,100, 80);
         fisrtName.setBounds(130,60,155,25);
         saveUser.setBounds(290,60,150,25);
         lastNameTitle.setBounds(10,90,120,25);
@@ -167,9 +167,9 @@ public final class BillFrame extends JFrame {
         cantTitle.setBounds(290,125,50,25);
         cant.setBounds(345,125,30,25);
         addProduct.setBounds( 380, 125, 150, 25);
-        panelTabla.setBounds(10, 155, 760, 350);
-        totalTitle.setBounds(10, 350, 250, 50 );
-        saveBill.setBounds( 680, 350, 150, 30);
+        panelTabla.setBounds(10, 155, 760, 250);
+        totalTitle.setBounds(10, 420, 250, 50 );
+        saveBill.setBounds( 620, 430, 150, 30);
         
         add(idUserTitle);
         add(idUser);
@@ -190,8 +190,8 @@ public final class BillFrame extends JFrame {
         add(cant);
         add(addProduct);
         add(panelTabla);
-        add(totalTitle);
         
+        add(totalTitle);
         add(saveBill);
         
         //Configuración del marco General        
