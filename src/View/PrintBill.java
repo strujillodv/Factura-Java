@@ -87,7 +87,7 @@ public final class PrintBill extends JFrame {
         setIconImage(icon);
         setLayout(null);
         setSize(300,420);
-        setLocation(Variables.positionX, Variables.positionY);
+        setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(scroll);

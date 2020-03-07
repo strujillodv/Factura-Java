@@ -21,8 +21,6 @@ import java.util.ArrayList;
  */
 public class Variables {
     
-    public static int positionX = 350;
-    public static int positionY = 100;
     public static int user = 0;
     public static String title = "Login";
     public static String img = "account";

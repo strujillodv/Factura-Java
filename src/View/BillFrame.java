@@ -76,55 +76,51 @@ public final class BillFrame extends JFrame {
         idUser.setBounds(130,20,155,25);
         
         searchUser = new JButton("Buscar Usuario");
-        searchUser.setBounds(290,20,150,25);
+        
         searchUser.setBorder(BorderFactory.createEmptyBorder());
         searchUser.setBackground(new Color(0,150,136));
         searchUser.setForeground(Color.white);
         searchUser.addActionListener(new ButtonListener());
         
         fisrtNameTitle = new JLabel("Nombre:");
-        fisrtNameTitle.setBounds(10,60,120,25);
+        
         
         Font fuenteNumber = new Font("helvetica", Font.PLAIN, 28);
         number = new JLabel("<html><div style=\"text-align: center;\">No. <br>" + numberBill + "</div></html>");
-        number.setBounds(450,20,100, 80);
         number.setFont(fuenteNumber);
         
         fisrtName = new JTextField("");
-        fisrtName.setBounds(130,60,155,25);
+        
+        
         
         saveUser = new JButton("Guardar Usuario");
-        saveUser.setBounds(290,60,150,25);
+       
         saveUser.setBorder(BorderFactory.createEmptyBorder());
         saveUser.setBackground(new Color(0,150,136));
         saveUser.setForeground(Color.white);
         saveUser.addActionListener(new ButtonListener());
         
         lastNameTitle = new JLabel("Apellido:");
-        lastNameTitle.setBounds(10,90,120,25);
         
-        lastName = new JTextField("");
-        lastName.setBounds(130,90,155,25);
+        lastName = new JTextField("");        
         
-        productListTitle = new JLabel("Selecione Producto");
-        productListTitle.setBounds(10,125,115,25);
+        productListTitle = new JLabel("Selecione Producto");        
         
         productList = new JComboBox(select);        
-        productList.setBounds(130, 125, 155, 25);
+        
         productList.addActionListener(new ComboBoxListener());
         
         cantTitle = new JLabel("Cantidad");
-        cantTitle.setBounds(290,125,50,25);
         
         cant = new JTextField("0");
-        cant.setBounds(345,125,30,25);
+        
         
         addProduct = new JButton("Agregar Item");
-        addProduct.setBounds( 380, 125, 150, 25);
+        
         addProduct.setBorder(BorderFactory.createEmptyBorder());
-        addProduct.setBackground(new Color(0,150,136));
         addProduct.setForeground(Color.white);
         addProduct.addActionListener(new ButtonListener());
+        addProduct.setBackground(new Color(0,150,136));
         
         // Creación de la tabla de valores
         cuadro= new DefaultTableModel(listJTable,nombreColumnas);
@@ -142,31 +138,38 @@ public final class BillFrame extends JFrame {
         
         Font fuente = new Font("helvetica", Font.PLAIN, 24);
         totalTitle = new JLabel("TOTAL: $ -------");
-        totalTitle.setBounds(10, 300, 250, 50 );
         totalTitle.setFont(fuente);
         
         // Panel que muestra la tabla
         JScrollPane panelTabla = new JScrollPane();
         panelTabla.setViewportView(table);
         panelTabla.setViewportView(table);
-        panelTabla.setBounds(10, 155, 525, 150);
         
         saveBill = new JButton("Guardar");
-        saveBill.setBounds( 380, 310, 150, 30);
         saveBill.setFont(fuente);
         saveBill.setBorder(BorderFactory.createEmptyBorder());
         saveBill.setBackground(new Color(0,150,136));
         saveBill.setForeground(Color.white);
         saveBill.addActionListener(new ButtonListener());  
         
-        //Configuración del marco General        
-        Image icon = new ImageIcon(getClass().getResource("/img/cash-register.png")).getImage();
-        setIconImage(icon);
-        setLayout(null);
-        setSize(550,380);
-        setLocation(Variables.positionX, Variables.positionY);
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        // Ubicación de los elementos
+                
+        searchUser.setBounds(290,20,150,25);
+        fisrtNameTitle.setBounds(10,60,120,25);
+        number.setBounds(650,20,100, 80);
+        fisrtName.setBounds(130,60,155,25);
+        saveUser.setBounds(290,60,150,25);
+        lastNameTitle.setBounds(10,90,120,25);
+        lastName.setBounds(130,90,155,25);
+        productListTitle.setBounds(10,125,115,25);
+        productList.setBounds(130, 125, 155, 25);
+        cantTitle.setBounds(290,125,50,25);
+        cant.setBounds(345,125,30,25);
+        addProduct.setBounds( 380, 125, 150, 25);
+        panelTabla.setBounds(10, 155, 760, 350);
+        totalTitle.setBounds(10, 350, 250, 50 );
+        saveBill.setBounds( 680, 350, 150, 30);
         
         add(idUserTitle);
         add(idUser);
@@ -190,6 +193,15 @@ public final class BillFrame extends JFrame {
         add(totalTitle);
         
         add(saveBill);
+        
+        //Configuración del marco General        
+        Image icon = new ImageIcon(getClass().getResource("/img/cash-register.png")).getImage();
+        setIconImage(icon);
+        setLayout(null);
+        setSize(800,520);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
     public void addItem() {

@@ -13,7 +13,7 @@ import View.MainFrame;
  *
  * @author Sergio Antonio Trujillo del Valle
  */
-public class MainOn {
+public class Main {
 
     /**
      * @param args the command line arguments
