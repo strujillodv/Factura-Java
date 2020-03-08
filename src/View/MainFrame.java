@@ -175,7 +175,9 @@ public class MainFrame extends JFrame {
                 if (response >= 0) {
                     Variables.title = Variables.cashiers.get(response).getName();
                     Variables.img = Variables.cashiers.get(response).getImg();
+                    
                     Variables.user = response;
+                    
                     MainFrame userFrame = new MainFrame();
                     userFrame.setVisible(true);
                     dispose();

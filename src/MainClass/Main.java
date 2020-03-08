@@ -1,5 +1,6 @@
 package MainClass;
 
+import View.BillFrame;
 import View.MainFrame;
 
 
@@ -21,7 +22,7 @@ public class Main {
     
     public static void main(String[] args) {        
         Data data = new Data();      
-        MainFrame login = new MainFrame();
+        BillFrame login = new BillFrame();
         login.setVisible(true);
     }
     

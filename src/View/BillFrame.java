@@ -1,14 +1,14 @@
 package View;
 
 import MainClass.Variables;
-import Model.User;
 import Model.ItemBill;
-import Model.Bill;
+import Model.Product;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -38,7 +38,7 @@ public final class BillFrame extends JFrame {
     static JTable table;
     static JButton addProduct, searchUser, saveUser, saveBill;
     static JLabel img, fisrtNameTitle, lastNameTitle, idUserTitle, pass, productListTitle, cantTitle, totalTitle, number;
-    static JTextField cant, fisrtName, lastName, idUser;
+    static JTextField cant, fisrtName, lastName, idUser, cctt;
     static DefaultTableModel cuadro;
     static DefaultTableCellRenderer alingCenter, alingRight;
     static JComboBox productList;
@@ -47,7 +47,9 @@ public final class BillFrame extends JFrame {
     public ArrayList<ItemBill> listProduct;
     public String[][] listJTable;
     
-    public String product;
+    public Stream<Product> productItem;
+    public int code;
+    public String productName;
     public String price;
     
     public String[] nombreColumnas = {"Codigo","Nombre","Cantidad","Valor U","Total Iva 19%","Total Neto","Total Venta"};
@@ -61,8 +63,10 @@ public final class BillFrame extends JFrame {
         this.listProduct = new ArrayList<>();        
         this.listJTable = new String[listProduct.size()][7];
         
-        this.product = "";
+        this.code = 0;
+        this.productName = "";
         this.price = "";
+        cctt = new JTextField("");
         
         this.numberBill = Variables.bills.size() + 1 ;
         
@@ -162,11 +166,15 @@ public final class BillFrame extends JFrame {
         saveUser.setBounds(290,60,150,25);
         lastNameTitle.setBounds(10,90,120,25);
         lastName.setBounds(130,90,155,25);
+        
         productListTitle.setBounds(10,125,115,25);
-        productList.setBounds(130, 125, 155, 25);
-        cantTitle.setBounds(290,125,50,25);
-        cant.setBounds(345,125,30,25);
-        addProduct.setBounds( 380, 125, 150, 25);
+        productList.setBounds(130, 125, 255, 25);
+        
+        cantTitle.setBounds(390,125,50,25);
+        cant.setBounds(450,125,30,25);
+        
+        addProduct.setBounds( 500, 125, 150, 25);
+        
         panelTabla.setBounds(10, 155, 760, 250);
         totalTitle.setBounds(10, 420, 250, 50 );
         saveBill.setBounds( 620, 430, 150, 30);
@@ -205,14 +213,22 @@ public final class BillFrame extends JFrame {
     }
     
     public void addItem() {
+        
+        Product io = Variables.products.get(code);
+        System.out.println(io.getName());
+        
         int cantidad = Integer.parseInt(cant.getText().trim());
-        int precio = Integer.parseInt(this.price.trim());
+        
+        int vUnitario = io.getValorUnitario();
+        int iva = cantidad*io.getIva();
+        int vUnitarioTotal = cantidad*io.getPrice();
+        int precio = io.getValorUnitario();
         
         if (cantidad > 0) {
             int valorTotal = cantidad*precio;
             
-            listProduct.add(new ItemBill("", this.product, cantidad, 0, 0, 0, valorTotal));
-            listJTable = new String[listProduct.size()][4];
+            listProduct.add(new ItemBill(io.getCodigo(), io.getName(), cantidad, vUnitario, iva, vUnitarioTotal, valorTotal));
+            listJTable = new String[listProduct.size()][7];
             cant.setText("0");
             setTable();
         } else {
@@ -230,7 +246,7 @@ public final class BillFrame extends JFrame {
         for(int i=0; i < listProduct.size(); i++) {
             this.listJTable[i][0] = listProduct.get(i).getCodigo();
             this.listJTable[i][1] = listProduct.get(i).getNombre();
-            this.listJTable[i][2] = "$ " + listProduct.get(i).getCantidad();
+            this.listJTable[i][2] = "" + listProduct.get(i).getCantidad();
             this.listJTable[i][3] = "$ " + listProduct.get(i).getValorUnitario();
             this.listJTable[i][4] = "$ " + listProduct.get(i).getTotalIva();
             this.listJTable[i][5] = "$ " + listProduct.get(i).getTotalNeto();
@@ -252,7 +268,7 @@ public final class BillFrame extends JFrame {
     public void setProducs() {
         
         for(int i=0; i < Variables.products.size(); i++) {
-            select[i]= Variables.products.get(i).getName() + " - " + Variables.products.get(i).getValorUnitario();   
+            select[i]= Variables.products.get(i).getCodigo() + " - " + Variables.products.get(i).getName() + " - " + Variables.products.get(i).getValorUnitario();   
         }
     }
     
@@ -262,12 +278,7 @@ public final class BillFrame extends JFrame {
         @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
             JComboBox cb = (JComboBox)e.getSource();
-            String item = (String)cb.getSelectedItem();
-            
-            String[] value = item.split("-");
-            
-            product = value[0];
-            price = value[1].replaceAll("[$ ]", "");
+            code = cb.getSelectedIndex();  
         }
     }
     

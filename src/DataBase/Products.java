@@ -33,13 +33,14 @@ public class Products extends ConnectionDB {
             
             while (response.next()) {
                 
+                int idProduct = response.getInt("idProduct");
                 String codigo = response.getString("codigo");
                 String name = response.getString("name");
                 int valorUnitario = response.getInt("valorUnitario");
                 int value = response.getInt("value");
                 int iva = response.getInt("iva");
                 
-                Variables.products.add(new Product(codigo, name, valorUnitario,value, iva));
+                Variables.products.add(new Product(idProduct, codigo, name, valorUnitario,value, iva));
             }
             
             closeConnection();

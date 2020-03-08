@@ -2,6 +2,7 @@ package Model;
 
 
 import MainClass.Variables;
+import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
 /*

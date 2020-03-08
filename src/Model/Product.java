@@ -12,18 +12,26 @@ package Model;
  */
 public class Product {
     
+    private final int idProduct;
     private final String codigo;
     private final String name;
     private final int valorUnitario;
     private final int price;
     private final int iva;
 
-    public Product(String codigo, String name, int valorUnitario, int price, int iva) {
+    public Product(int idProduct, String codigo, String name, int valorUnitario, int price, int iva) {
+        this.idProduct = idProduct;
         this.codigo = codigo;
         this.name = name;
         this.valorUnitario = valorUnitario;
         this.price = price;
         this.iva = iva;
+    }
+
+    
+    
+    public int getIdProduct() {
+        return idProduct;
     }
 
     public String getCodigo() {

@@ -20,7 +20,7 @@ public class ItemBill {
     private final int totalIva;
     private final int total;
 
-    public ItemBill(String codigo, String nombre, int cantidad, int valorUnitario, int totalNeto, int totalIva, int total) {
+    public ItemBill(String codigo, String nombre, int cantidad, int valorUnitario, int totalIva, int totalNeto, int total) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.cantidad = cantidad;
