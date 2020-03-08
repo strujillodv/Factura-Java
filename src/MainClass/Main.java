@@ -22,7 +22,7 @@ public class Main {
     
     public static void main(String[] args) {        
         Data data = new Data();      
-        BillFrame login = new BillFrame();
+        MainFrame login = new MainFrame();
         login.setVisible(true);
     }
     
