@@ -135,7 +135,7 @@ public class MainFrame extends JFrame {
             logout.setBounds(606, 300, 132,100);
             
             titleName.setText("Nombre: " + Variables.cashiers.get(Variables.user).getName());
-            titleIdUser.setText("Usuario: " + Variables.cashiers.get(Variables.user).getIdUser());
+            titleIdUser.setText("Usuario: " + Variables.cashiers.get(Variables.user).getIdNumber());
             pass.setText("Rol: " + Variables.cashiers.get(Variables.user).getRole());
             
             add(titleName);

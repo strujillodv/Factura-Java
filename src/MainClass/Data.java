@@ -1,6 +1,7 @@
 package MainClass;
 
 import DataBase.Bills;
+import DataBase.GetStore;
 import DataBase.Products;
 import DataBase.Users;
 import Model.Cashier;
@@ -22,6 +23,10 @@ public class Data {
         // Ingresamos los datos de los trabajadores
         Variables.cashiers.add(new Cashier("Sergio Antonio Trujillo del valle", "3144000233", "Cra 9 No. 4-08, of 2-09", "User-men-1", 1075660396, "password", "Cajero"));
         Variables.cashiers.add(new Cashier("Yury Tavera Gomez", "3213850184", "Cra 5 No 2-08", "User-women-1", 35423813, "password", "Cajera"));
+        
+        //Cargamos la información de la tienda
+        GetStore store = new GetStore();
+        store.getQuery();        
         
         // Cargamos la información de los Productos
         //Variables.products.add(new Product("", "", "", 0.0));

@@ -2,7 +2,6 @@ package Model;
 
 
 import MainClass.Variables;
-import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
 /*
@@ -33,12 +32,12 @@ public class Login {
         int response;
         
         boolean isUser = Variables.cashiers.stream().anyMatch(
-            i -> user.equals(Integer.toString(i.getIdUser())) &&
+            i -> user.equals(Integer.toString(i.getIdNumber())) &&
                  password.equals(i.getPassword())
         );
         
         if (isUser) {
-            response = Variables.cashiers.indexOf(Variables.cashiers.stream().filter(userId-> user.equals(Integer.toString(userId.getIdUser())))
+            response = Variables.cashiers.indexOf(Variables.cashiers.stream().filter(userNumber-> user.equals(Integer.toString(userNumber.getIdNumber())))
             .findFirst()
             .get());
         } else {

@@ -43,7 +43,7 @@ public class ConnectionDB {
             connectionDB = (Connection) DriverManager.getConnection(this.host, properties);
 
             if (connectionDB!=null){
-                System.out.println("Conexión a Base de Datos OK");
+                System.out.println("Conexión a Base de Datos Establecida");
             }
         }catch(SQLException e){
             System.out.println("Error de MySQL: \n" + e);
@@ -61,7 +61,7 @@ public class ConnectionDB {
         try {
             if (connectionDB != null) {
                 connectionDB.close();
-                System.out.println("Conección Cerrada");
+                System.out.println("Conexión Cerrada");
             }
         } catch (SQLException e){
             System.out.println("Error de MySQL: \n" + e);

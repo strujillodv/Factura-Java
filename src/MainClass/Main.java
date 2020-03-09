@@ -21,7 +21,7 @@ public class Main {
      */    
     
     public static void main(String[] args) {        
-        Data data = new Data();      
+        Data data = new Data();
         MainFrame login = new MainFrame();
         login.setVisible(true);
     }

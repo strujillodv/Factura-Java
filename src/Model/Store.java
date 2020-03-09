@@ -16,6 +16,7 @@ public class Store {
     private final String telephone;
     private final String adress;
     private final String imgUrl;
+    private int idStore;
 
     public Store(String name, String nit, String telephone, String adress, String imgUrl) {
         this.name = name;
@@ -23,6 +24,7 @@ public class Store {
         this.telephone = telephone;
         this.adress = adress;
         this.imgUrl = imgUrl;
+        this.idStore = 0;
     }
 
     public String getName() {
@@ -44,7 +46,13 @@ public class Store {
     public String getImgUrl() {
         return imgUrl;
     }
-    
-    
+
+    public int getIdStore() {
+        return idStore;
+    }
+
+    public void setIdStore(int idStore) {
+        this.idStore = idStore;
+    }    
     
 }

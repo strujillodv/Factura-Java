@@ -13,14 +13,16 @@ package Model;
 public class User {
 
     private final String name, telephone, adress, img;
-    private final int idUser;
+    private final int idNumber;
+    private int idUser;
 
-    public User(String name, String telephone, String adress, String img, int idUser) {
+    public User(String name, String telephone, String adress, String img, int idNumber) {
         this.name = name;
         this.telephone = telephone;
         this.adress = adress;
         this.img = img;
-        this.idUser = idUser;
+        this.idNumber = idNumber;
+        this.idUser = 0;
     }
 
     public String getName() {
@@ -39,8 +41,16 @@ public class User {
         return img;
     }
 
+    public int getIdNumber() {
+        return idNumber;
+    }
+
     public int getIdUser() {
         return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
     
 }

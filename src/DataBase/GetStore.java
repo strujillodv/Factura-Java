@@ -38,8 +38,11 @@ public class GetStore extends ConnectionDB {
                 String telephone = response.getString("telephone");
                 String adress = response.getString("adress");
                 String imgUrl = response.getString("imgUrl");
+                int idStore = response.getInt("idStore");
                 
                 Variables.store = new Store(name, nit, telephone, adress, imgUrl);
+                
+                Variables.store.setIdStore(idStore);
             }
             
             closeConnection();

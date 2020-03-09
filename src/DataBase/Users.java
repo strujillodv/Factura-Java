@@ -38,8 +38,11 @@ public class Users extends ConnectionDB {
                 String adress = response.getString("adress");
                 String imgUrl = response.getString("imgUrl");                
                 int documentNumber = response.getInt("idNumber");
+                int idUser = response.getInt("idUser");
                 
                 Variables.users.add(new User(name, telephone, adress, imgUrl, documentNumber));
+                
+                Variables.users.get(Variables.users.size()-1).setIdUser(idUser);
             }
             
             closeConnection();
@@ -68,7 +71,8 @@ public class Users extends ConnectionDB {
                 String imgUrl = response.getString("imgUrl");                
                 int documentNumber = response.getInt("idNumber");
                 
-                Variables.users.add(new User(name, telephone, adress, imgUrl, documentNumber));
+//                Variables.users.add(new User(name, telephone, adress, imgUrl, documentNumber));
+//                Variables.users.get(Variables.users.size()-1).setIdUser(idUser);
             }
             
             closeConnection();
@@ -97,6 +101,15 @@ public class Users extends ConnectionDB {
             ps.setInt(5, idNumber);
             
             int res = ps.executeUpdate();
+            ResultSet generatedKeys = ps.getGeneratedKeys();
+            
+            if (generatedKeys.next()) {
+                
+                int idGenerado = generatedKeys.getInt(1);
+                Variables.users.add(new User(name, telephone, adress, imgUrl, idNumber));
+                Variables.users.get(Variables.users.size()-1).setIdUser(idGenerado);
+                     
+            }
             
             if(res > 0) {
                 JOptionPane.showMessageDialog(null, "Usuario Guardado Correctamente");

@@ -25,6 +25,7 @@ public class Variables {
     public static String title = "Login";
     public static String img = "account";
     public static Store store;
+    public static User client = new User("", "", "", "", 0);
     public static  ArrayList<User> users = new  ArrayList<User>();
     public static  ArrayList<Cashier> cashiers = new  ArrayList<Cashier>();
     public static  ArrayList<Product> products = new  ArrayList<Product>();

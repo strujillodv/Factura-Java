@@ -1,8 +1,11 @@
 package View;
 
+import DataBase.Bills;
 import MainClass.Variables;
+import Model.Bill;
 import Model.ItemBill;
 import Model.Product;
+import Model.Store;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -37,24 +40,26 @@ public final class BillFrame extends JFrame {
     
     static JTable table;
     static JButton addProduct, searchUser, saveUser, saveBill;
-    static JLabel img, fisrtNameTitle, lastNameTitle, idUserTitle, pass, productListTitle, cantTitle, totalTitle, number;
-    static JTextField cant, fisrtName, lastName, idUser, cctt;
+    static JLabel img, userNameTitle, telephoneTitle, idUserTitle, pass, productListTitle, cantTitle, totalTitle, number;
+    static JTextField cant, userName, telephone, idUser;
     static DefaultTableModel cuadro;
     static DefaultTableCellRenderer alingCenter, alingRight;
     static JComboBox productList;
     public final String[] select;
+    public Store store;
     
     public ArrayList<ItemBill> listProduct;
     public String[][] listJTable;
     
     public Stream<Product> productItem;
+    
+    public int numberBill;
     public int code;
+    public int totalBill;
     public String productName;
     public String price;
     
     public String[] nombreColumnas = {"Codigo","Nombre","Cantidad","Valor U","Total Iva 19%","Total Neto","Total Venta"};
-    
-    public int numberBill;
     
     public BillFrame() {
     
@@ -66,7 +71,7 @@ public final class BillFrame extends JFrame {
         this.code = 0;
         this.productName = "";
         this.price = "";
-        cctt = new JTextField("");
+        this.totalBill = 0;
         
         this.numberBill = Variables.bills.size() + 1 ;
         
@@ -76,7 +81,7 @@ public final class BillFrame extends JFrame {
         idUserTitle = new JLabel("Id Usuario: ");
         idUserTitle.setBounds(10,20,120,25);
         
-        idUser = new JTextField("");
+        idUser = new JTextField(Variables.client.getIdNumber());
         idUser.setBounds(130,20,155,25);
         
         searchUser = new JButton("Buscar Usuario");
@@ -86,14 +91,14 @@ public final class BillFrame extends JFrame {
         searchUser.setForeground(Color.white);
         searchUser.addActionListener(new ButtonListener());
         
-        fisrtNameTitle = new JLabel("Nombre:");
+        userNameTitle = new JLabel("Nombre:");
         
         
         Font fuenteNumber = new Font("helvetica", Font.PLAIN, 28);
         number = new JLabel("<html><div style=\"text-align: center;\">No. <br>" + numberBill + "</div></html>");
         number.setFont(fuenteNumber);
         
-        fisrtName = new JTextField("");
+        userName = new JTextField(Variables.client.getName());
         
         
         
@@ -104,9 +109,9 @@ public final class BillFrame extends JFrame {
         saveUser.setForeground(Color.white);
         saveUser.addActionListener(new ButtonListener());
         
-        lastNameTitle = new JLabel("Apellido:");
+        telephoneTitle = new JLabel("Telefono:");
         
-        lastName = new JTextField("");        
+        telephone = new JTextField(Variables.client.getTelephone());        
         
         productListTitle = new JLabel("Selecione Producto");        
         
@@ -136,9 +141,13 @@ public final class BillFrame extends JFrame {
         
         table = new JTable(cuadro);
         
+        table.getColumnModel().getColumn(0).setCellRenderer(alingCenter);
         table.getColumnModel().getColumn(1).setCellRenderer(alingCenter);
-        table.getColumnModel().getColumn(2).setCellRenderer(alingRight);
+        table.getColumnModel().getColumn(2).setCellRenderer(alingCenter);
         table.getColumnModel().getColumn(3).setCellRenderer(alingRight);
+        table.getColumnModel().getColumn(4).setCellRenderer(alingRight);
+        table.getColumnModel().getColumn(5).setCellRenderer(alingRight);
+        table.getColumnModel().getColumn(6).setCellRenderer(alingRight);
         
         Font fuente = new Font("helvetica", Font.PLAIN, 24);
         totalTitle = new JLabel("TOTAL: $ -------");
@@ -160,12 +169,12 @@ public final class BillFrame extends JFrame {
         // Ubicación de los elementos
                 
         searchUser.setBounds(290,20,150,25);
-        fisrtNameTitle.setBounds(10,60,120,25);
+        userNameTitle.setBounds(10,60,120,25);
         number.setBounds(670,20,100, 80);
-        fisrtName.setBounds(130,60,155,25);
+        userName.setBounds(130,60,155,25);
         saveUser.setBounds(290,60,150,25);
-        lastNameTitle.setBounds(10,90,120,25);
-        lastName.setBounds(130,90,155,25);
+        telephoneTitle.setBounds(10,90,120,25);
+        telephone.setBounds(130,90,155,25);
         
         productListTitle.setBounds(10,125,115,25);
         productList.setBounds(130, 125, 255, 25);
@@ -184,13 +193,12 @@ public final class BillFrame extends JFrame {
         add(searchUser);
         add(number);
         
-        add(fisrtNameTitle);
-        add(fisrtName);
+        add(userNameTitle);
+        add(userName);
         
-        add(saveUser);
         
-        add(lastNameTitle);
-        add(lastName);
+        add(telephoneTitle);
+        add(telephone);
         
         add(productListTitle);
         add(productList);
@@ -262,6 +270,7 @@ public final class BillFrame extends JFrame {
             suma = suma +listProduct.get(i).getTotal();
         }
         total = "$ " + suma;
+        totalBill = suma;
         return total;
     }
     
@@ -293,33 +302,38 @@ public final class BillFrame extends JFrame {
                 addItem();
                 totalTitle.setText("TOTAL: " + setTotal());
                 cuadro.setDataVector(listJTable, nombreColumnas);
+                table.getColumnModel().getColumn(0).setCellRenderer(alingCenter);
                 table.getColumnModel().getColumn(1).setCellRenderer(alingCenter);
-                table.getColumnModel().getColumn(2).setCellRenderer(alingRight);
+                table.getColumnModel().getColumn(2).setCellRenderer(alingCenter);
                 table.getColumnModel().getColumn(3).setCellRenderer(alingRight);
+                table.getColumnModel().getColumn(4).setCellRenderer(alingRight);
+                table.getColumnModel().getColumn(5).setCellRenderer(alingRight);
+                table.getColumnModel().getColumn(6).setCellRenderer(alingRight);
             }
             else if (e.getSource() == searchUser) {
                 
                 int index = -1;
                 
                 boolean isUser = Variables.users.stream().anyMatch(
-                    i -> idUser.getText().equals(Integer.toString(i.getIdUser()))
+                    user -> idUser.getText().equals(Integer.toString(user.getIdNumber()))
                 );
                 
                 if (isUser) {
                     index = Variables.users.indexOf(
                         Variables.users
-                            .stream().filter(userId-> idUser.getText().equals(Integer.toString(userId.getIdUser())))
-                            .findFirst().get()
-                            );
+                        .stream().filter(userId-> idUser.getText().equals(Integer.toString(userId.getIdNumber())))
+                        .findFirst().get()
+                    );
                 
                 } 
                 
                 if (index >= 0) {
-                    fisrtName.setText(Variables.users.get(index).getName());
-                    lastName.setText(Variables.users.get(index).getTelephone());
+                    Variables.client = Variables.users.get(index);
+                    userName.setText(Variables.client.getName());
+                    telephone.setText(Variables.client.getTelephone());
                 } else {
-                    fisrtName.setText("");
-                    lastName.setText("");
+                    userName.setText("");
+                    telephone.setText("");
                     JOptionPane.showMessageDialog(
                         null, 
                         "El usuario no existe, ingrese los datos \ny guardelo en el Sistema.",
@@ -328,26 +342,28 @@ public final class BillFrame extends JFrame {
                     );
                 }
             }
-            else if (e.getSource() == saveUser) {
-                //Variables.users.add(new User(fisrtName.getText(),lastName.getText(), "User-men-2","","", Integer.parseInt(idUser.getText().trim())));
-                JOptionPane.showMessageDialog(
-                    null, 
-                    "El usuario fue guardado en el Sistema."
-                );
-            }
             else if (e.getSource() == saveBill) {
                 
                 Variables.title = "Factura No. " + numberBill;
                 
-//                Variables.bills.add(
-//                    new Bill(
-//                        "No. " + numberBill,
-//                        Integer.parseInt(idUser.getText().trim()),
-//                        fisrtName.getText() + " " +lastName.getText(),
-//                        listJTable,
-//                        totalTitle.getText()
-//                    )
-//                );
+                Variables.bills.add(
+                    new Bill(
+                        numberBill,
+                        Variables.client,
+                        Variables.store,
+                        listJTable,                        
+                        totalBill
+                    )
+                );
+                
+                Bills saveBillDB = new Bills();
+                
+                saveBillDB.SetData(
+                        numberBill,
+                        Variables.client.getIdUser(),
+                        Variables.store.getIdStore(),
+                        listJTable,
+                        totalBill);
                 
                 PrintBill print = new PrintBill();
                 print.setVisible(true);

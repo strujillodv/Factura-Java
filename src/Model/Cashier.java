@@ -15,8 +15,8 @@ public class Cashier extends User{
     private final String password;
     private final String role;
     
-    public Cashier(String name, String telephone, String adress, String img, int idUser, String pass, String role) {
-        super(name, telephone, adress, img, idUser);
+    public Cashier(String name, String telephone, String adress, String img, int idNumber, String pass, String role) {
+        super(name, telephone, adress, img, idNumber);
         this.password = pass;
         this.role = role;
     }
