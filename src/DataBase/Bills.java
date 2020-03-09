@@ -161,9 +161,9 @@ public class Bills extends ConnectionDB {
                 psItem.setString(2, list1[0]);
                 psItem.setString(3, list1[1]);
                 psItem.setInt(4, Integer.parseInt(list1[2].replaceAll("[$ ]", "")));
-                psItem.setInt(5, Integer.parseInt(list1[3].replaceAll("[$ ]", "")));
+                psItem.setInt(5, Integer.parseInt(list1[5].replaceAll("[$ ]", "")));
                 psItem.setInt(6, Integer.parseInt(list1[4].replaceAll("[$ ]", "")));
-                psItem.setInt(7, Integer.parseInt(list1[5].replaceAll("[$ ]", "")));
+                psItem.setInt(7, Integer.parseInt(list1[3].replaceAll("[$ ]", "")));
                 psItem.setInt(8, Integer.parseInt(list1[6].replaceAll("[$ ]", "")));
                 int res = psItem.executeUpdate();
                 if(res > 0) {

@@ -364,6 +364,7 @@ public final class BillFrame extends JFrame {
                         Variables.store.getIdStore(),
                         listJTable,
                         totalBill);
+                                
                 
                 PrintBill print = new PrintBill();
                 print.setVisible(true);

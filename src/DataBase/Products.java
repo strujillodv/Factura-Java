@@ -37,10 +37,8 @@ public class Products extends ConnectionDB {
                 String codigo = response.getString("codigo");
                 String name = response.getString("name");
                 int valorUnitario = response.getInt("valorUnitario");
-                int value = response.getInt("value");
-                int iva = response.getInt("iva");
                 
-                Variables.products.add(new Product(idProduct, codigo, name, valorUnitario,value, iva));
+                Variables.products.add(new Product(idProduct, codigo, name, valorUnitario));
             }
             
             closeConnection();
@@ -53,9 +51,9 @@ public class Products extends ConnectionDB {
     
     
     
-    public void SetData(String codigo, String name, int valorUnitario, int price, int iva) {
+    public void SetData(String codigo, String name, int valorUnitario) {
         
-        String sql = "INSERT INTO Products (codigo, name, valorUnitario, value, iva) VALUES (?,?,?,?,?);";
+        String sql = "INSERT INTO Products (codigo, name, valorUnitario) VALUES (?,?,?,?,?);";
         
         try {
             
@@ -65,8 +63,6 @@ public class Products extends ConnectionDB {
             ps.setString(1, codigo);
             ps.setString(2, name);
             ps.setInt(3, valorUnitario);
-            ps.setInt(4, price);
-            ps.setInt(5, iva);
             
             int res = ps.executeUpdate();
             

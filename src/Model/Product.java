@@ -19,16 +19,16 @@ public class Product {
     private final int price;
     private final int iva;
 
-    public Product(int idProduct, String codigo, String name, int valorUnitario, int price, int iva) {
+    public Product(int idProduct, String codigo, String name, int valorUnitario) {
+        double porcentaje = valorUnitario * 0.19;
         this.idProduct = idProduct;
         this.codigo = codigo;
         this.name = name;
         this.valorUnitario = valorUnitario;
-        this.price = price;
-        this.iva = iva;
+        this.iva = (int) porcentaje;
+        this.price = valorUnitario - this.iva;
+        
     }
-
-    
     
     public int getIdProduct() {
         return idProduct;
