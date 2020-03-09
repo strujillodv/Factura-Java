@@ -36,7 +36,7 @@ public class Bills extends ConnectionDB {
         
         try {
             
-            openConnection();
+            openConnection("Optener todas las Facturas");
             
             listProduct = new ArrayList<>(); 
             
@@ -116,7 +116,7 @@ public class Bills extends ConnectionDB {
         
         try {
             
-            openConnection();     
+            openConnection("Crear Factura");     
             
             ps = getConnectionDB().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             

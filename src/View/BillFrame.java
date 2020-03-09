@@ -81,7 +81,7 @@ public final class BillFrame extends JFrame {
         idUserTitle = new JLabel("Id Usuario: ");
         idUserTitle.setBounds(10,20,120,25);
         
-        idUser = new JTextField(Variables.client.getIdNumber());
+        idUser = new JTextField("" + Variables.client.getIdNumber());
         idUser.setBounds(130,20,155,25);
         
         searchUser = new JButton("Buscar Usuario");
@@ -329,17 +329,21 @@ public final class BillFrame extends JFrame {
                 
                 if (index >= 0) {
                     Variables.client = Variables.users.get(index);
+                    idUser.setText("" + Variables.client.getIdNumber());
                     userName.setText(Variables.client.getName());
                     telephone.setText(Variables.client.getTelephone());
                 } else {
-                    userName.setText("");
-                    telephone.setText("");
+                    Variables.user = Integer.parseInt(idUser.getText().trim());
                     JOptionPane.showMessageDialog(
                         null, 
                         "El usuario no existe, ingrese los datos \ny guardelo en el Sistema.",
                         "Error",
                         JOptionPane.ERROR_MESSAGE
                     );
+                    UserFrame newUser = new UserFrame();
+                    newUser.setVisible(true);
+                    newUser.setLocationRelativeTo(null);
+                    dispose();
                 }
             }
             else if (e.getSource() == saveBill) {

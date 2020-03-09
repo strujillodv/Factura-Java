@@ -27,7 +27,7 @@ public class Products extends ConnectionDB {
         
         try {
             
-            openConnection();        
+            openConnection("Obtener Todos los Productos");        
             ps = getConnectionDB().prepareStatement("SELECT * FROM Products");
             response = ps.executeQuery();
             
@@ -59,7 +59,7 @@ public class Products extends ConnectionDB {
         
         try {
             
-            openConnection();        
+            openConnection("Crear Producto");        
             ps = getConnectionDB().prepareStatement(sql);
             
             ps.setString(1, codigo);

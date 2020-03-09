@@ -42,15 +42,15 @@ public final class PrintBill extends JFrame {
         
         number = new JLabel("Factura " + bill.getNumber());
         number.setFont(fuente);
-        //idUser = new JLabel("Documento No. " +bill.getIdUser());
+        idUser = new JLabel("Documento No. " +bill.getUser().getIdNumber());
         idUser.setFont(fuente);        
-        //name = new JLabel("Nombre " + bill.getNpmbre());
+        name = new JLabel("Nombre " + bill.getUser().getName());
         name.setFont(fuente);
                 
         list = new JLabel("<html>" + setList(bill.getList()) + "<hr></html>");
         list.setFont(fuente);        
         
-        //total = new JLabel(bill.getTotal());
+        total = new JLabel("Total: $" + bill.getTotal());
         total.setFont(fuenteTotal);
         
         newBill = new JButton("Nueva Factura");
