@@ -201,12 +201,13 @@ public class UserFrame extends JFrame {
         // TODO add your handling code here:
         Users newUser = new Users();
         newUser.SetData(nameUser.getText().trim(), telephone.getText(), adress.getText(), img, Variables.client.getIdUser());
-        Variables.client = Variables.users.get(Variables.users.size() - 1);
+        
         if (Variables.client.getIdUser() == 0) {
             UserList userList = new UserList();
             userList.setVisible(true);
             dispose();        
         } else {
+            Variables.client = Variables.users.get(Variables.users.size() - 1);
             BillFrame bill = new BillFrame();
             bill.setVisible(true);
             dispose();
