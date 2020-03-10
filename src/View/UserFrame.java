@@ -28,10 +28,13 @@ public class UserFrame extends JFrame {
      */
     public UserFrame() {
         
+        Image icon = new ImageIcon(getClass().getResource("/img/cash-register.png")).getImage();
+        
         Font fuente = new Font("helvetica", Font.PLAIN, 18);
         
         this.img = "account";
         initComponents();
+        setIconImage(icon);
         ImageIcon icono = new ImageIcon(getClass().getResource("/img/account.png"));
         Image imagen = icono.getImage();
         ImageIcon iconoEscalado = new ImageIcon (imagen.getScaledInstance(160,160,Image.SCALE_SMOOTH));
@@ -204,11 +207,13 @@ public class UserFrame extends JFrame {
         
         if (Variables.client.getIdUser() == 0) {
             UserList userList = new UserList();
+            userList.setLocationRelativeTo(null);
             userList.setVisible(true);
             dispose();        
         } else {
             Variables.client = Variables.users.get(Variables.users.size() - 1);
             BillFrame bill = new BillFrame();
+            bill.setLocationRelativeTo(null);
             bill.setVisible(true);
             dispose();
         }
