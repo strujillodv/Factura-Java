@@ -153,6 +153,7 @@ public class Produc extends javax.swing.JFrame {
         // TODO add your handling code here:
         Products pro = new Products();
         pro.SetData(codigo.getText(), name.getText(), Integer.parseInt(value.getText().trim()));
+        
         ProductsFrame pFrame = new ProductsFrame();
         pFrame.setLocationRelativeTo(null);
         pFrame.setVisible(true);

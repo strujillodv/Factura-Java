@@ -68,6 +68,11 @@ public class PrintBill extends javax.swing.JFrame {
         jButton6.setBorder(BorderFactory.createEmptyBorder());
         jButton6.setBackground(new Color(0,150,136));
         jButton6.setForeground(Color.white);
+        
+        jButton7.setFont(fuente);
+        jButton7.setBorder(BorderFactory.createEmptyBorder());
+        jButton7.setBackground(new Color(0,150,136));
+        jButton7.setForeground(Color.white);
     }
 
     /**
@@ -102,6 +107,7 @@ public class PrintBill extends javax.swing.JFrame {
         imgUser = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         number = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,6 +158,13 @@ public class PrintBill extends javax.swing.JFrame {
 
         number.setText("jLabel9");
 
+        jButton7.setText("Volver");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,7 +174,9 @@ public class PrintBill extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(total, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(170, 170, 170)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -250,7 +265,8 @@ public class PrintBill extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
 
@@ -266,6 +282,17 @@ public class PrintBill extends javax.swing.JFrame {
         userFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        BillsFrame billsFrame = new BillsFrame();
+        billsFrame.setVisible(true);
+        billsFrame.setLocationRelativeTo(null);
+        //Configuración del marco General
+        Image icon = new ImageIcon(getClass().getResource("/img/cash-register.png")).getImage();
+        billsFrame.setIconImage(icon);
+        dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -308,6 +335,7 @@ public class PrintBill extends javax.swing.JFrame {
     private javax.swing.JLabel imgStore;
     private javax.swing.JLabel imgUser;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

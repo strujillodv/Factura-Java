@@ -224,7 +224,8 @@ public class MainFrame extends JFrame {
                 dispose();
             
             } else if (e.getSource() == users) {
-                 UserList userList = new UserList();
+                UserList userList = new UserList();
+                userList.setLocationRelativeTo(null);
                 userList.setVisible(true);
                 dispose();
             }
