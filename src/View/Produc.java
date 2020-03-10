@@ -6,7 +6,7 @@
 package View;
 
 import DataBase.Products;
-import Model.ProductsFrame;
+import View.ProductsFrame;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.BorderFactory;
