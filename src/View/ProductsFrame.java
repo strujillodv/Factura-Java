@@ -33,7 +33,7 @@ public class ProductsFrame extends javax.swing.JFrame {
                 
         Image icon = new ImageIcon(getClass().getResource("/img/cash-register.png")).getImage();
         
-        this.listJTable = new String[Variables.bills.size()][5];
+        this.listJTable = new String[Variables.products.size()][5];
         
         for(int i=0; i < Variables.products.size(); i++) {
             this.listJTable[i][0] = "" + Variables.products.get(i).getCodigo();
