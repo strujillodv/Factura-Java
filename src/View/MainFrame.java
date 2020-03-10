@@ -143,6 +143,7 @@ public class MainFrame extends JFrame {
             add(newBill);
             add(bills);
             add(products);
+            add(users);
             add(logout);
             
         }
@@ -222,6 +223,10 @@ public class MainFrame extends JFrame {
                 pFrame.setVisible(true);
                 dispose();
             
+            } else if (e.getSource() == users) {
+                 UserList userList = new UserList();
+                userList.setVisible(true);
+                dispose();
             }
         }
      }

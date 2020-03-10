@@ -7,7 +7,10 @@ package View;
 
 import DataBase.Users;
 import MainClass.Variables;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -24,6 +27,9 @@ public class UserFrame extends JFrame {
      * Creates new form UserFrame
      */
     public UserFrame() {
+        
+        Font fuente = new Font("helvetica", Font.PLAIN, 18);
+        
         this.img = "account";
         initComponents();
         ImageIcon icono = new ImageIcon(getClass().getResource("/img/account.png"));
@@ -32,6 +38,11 @@ public class UserFrame extends JFrame {
         imgUser.setIcon(iconoEscalado);
         idUserNumber.setText("" + Variables.client.getIdUser());
         setResizable(false);
+        
+        jButton1.setFont(fuente);
+        jButton1.setBorder(BorderFactory.createEmptyBorder());
+        jButton1.setBackground(new Color(0,150,136));
+        jButton1.setForeground(Color.white);
         
     }
 
@@ -45,7 +56,6 @@ public class UserFrame extends JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        idUserNumber = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         nameUser = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -56,13 +66,12 @@ public class UserFrame extends JFrame {
         jLabel7 = new javax.swing.JLabel();
         imgCombobox = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        idUserNumber = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nuevo Usuario");
 
         jLabel1.setText("No. Documento");
-
-        idUserNumber.setText("jLabel1");
 
         jLabel3.setText("Nombre");
 
@@ -117,10 +126,11 @@ public class UserFrame extends JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nameUser, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(idUserNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(adress, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(adress, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(idUserNumber, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)))
                         .addGap(109, 109, 109)
                         .addComponent(imgUser, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -134,10 +144,10 @@ public class UserFrame extends JFrame {
                             .addComponent(imgCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(56, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(344, 344, 344))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(311, 311, 311)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,9 +163,9 @@ public class UserFrame extends JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(idUserNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(idUserNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nameUser, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,9 +177,9 @@ public class UserFrame extends JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(imgCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(74, 74, 74)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
 
         pack();
@@ -192,9 +202,16 @@ public class UserFrame extends JFrame {
         Users newUser = new Users();
         newUser.SetData(nameUser.getText().trim(), telephone.getText(), adress.getText(), img, Variables.client.getIdUser());
         Variables.client = Variables.users.get(Variables.users.size() - 1);
-        BillFrame bill = new BillFrame();
-        bill.setVisible(true);
-        dispose();
+        if (Variables.client.getIdUser() == 0) {
+            UserList userList = new UserList();
+            userList.setVisible(true);
+            dispose();        
+        } else {
+            BillFrame bill = new BillFrame();
+            bill.setVisible(true);
+            dispose();
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void imgComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imgComboboxActionPerformed
@@ -262,7 +279,7 @@ public class UserFrame extends JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField adress;
-    private javax.swing.JLabel idUserNumber;
+    private javax.swing.JTextField idUserNumber;
     private javax.swing.JComboBox<String> imgCombobox;
     private javax.swing.JLabel imgUser;
     private javax.swing.JButton jButton1;

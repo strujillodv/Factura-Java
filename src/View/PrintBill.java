@@ -30,7 +30,7 @@ public class PrintBill extends javax.swing.JFrame {
      */
     public PrintBill() {
         
-        Font fuente = new Font("helvetica", Font.PLAIN, 18);
+        Font fuente = new Font("helvetica", Font.PLAIN, 16);
         
         getBill = Variables.bills.get(Variables.bill);
         
@@ -42,19 +42,7 @@ public class PrintBill extends javax.swing.JFrame {
         Image imagen2 = icono2.getImage();
         ImageIcon iconoEscalado2 = new ImageIcon (imagen2.getScaledInstance(100,100,Image.SCALE_SMOOTH));
         
-        String[][] listProduct = getBill.getList();
-        
-        this.listJTable = new String[getBill.getList().length][5];
-        
-        for(int i=0; i < getBill.getList().length; i++) {
-            this.listJTable[i][0] = "" + listProduct[i][0];
-            this.listJTable[i][1] = listProduct[i][1];
-            this.listJTable[i][2] = "" + listProduct[i][2];
-            this.listJTable[i][3] = "" + listProduct[i][3];
-            this.listJTable[i][4] = "" + listProduct[i][4];
-        }  
-        
-        cuadro = new DefaultTableModel(listJTable,nombreColumnas);
+        cuadro = new DefaultTableModel(getBill.getList(),nombreColumnas);
         
         initComponents();
         
@@ -171,10 +159,10 @@ public class PrintBill extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(total, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(170, 170, 170)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

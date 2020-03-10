@@ -177,5 +177,19 @@ public class Bills extends ConnectionDB {
         }
     }
     
+    public void Delete(int numberBill) {
+        
+        String sql = "DELETE FROM Bills WHERE Number = " + numberBill;
+        
+        try {
+            
+            openConnection("Optener todas las Facturas");
+            psItem = getConnectionDB().prepareStatement(sql);
+            closeConnection();
+            
+        }catch (SQLException e){
+                JOptionPane.showMessageDialog(null, "Error de MySQL: \n" + e);
+        }
+    }
     
 }
