@@ -54,6 +54,11 @@ public class BillsFrame extends javax.swing.JFrame {
         jButton2.setBorder(BorderFactory.createEmptyBorder());
         jButton2.setBackground(new Color(0,150,136));
         jButton2.setForeground(Color.white);
+        
+        jButton4.setFont(fuente);
+        jButton4.setBorder(BorderFactory.createEmptyBorder());
+        jButton4.setBackground(new Color(0,150,136));
+        jButton4.setForeground(Color.white);
     }
 
     /**
