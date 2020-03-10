@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package View;
 
 import MainClass.Variables;
@@ -5,129 +10,333 @@ import Model.Bill;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Sergio Antonio trujillo del Valle
+ * @author Sergio Antonio Trujillo del Valle
  */
-public final class PrintBill extends JFrame {
+public class PrintBill extends javax.swing.JFrame {
     
-    static JButton newBill, logout;
-    static JLabel number, name, idUser, list, total;
-    
+    static DefaultTableModel cuadro;
+    public String[] nombreColumnas = {"Codigo","Nombre","Valor Unitario", "Iva", "Total Neto"};
+    private final Bill getBill;
+    private String[][] listJTable;
+
+    /**
+     * Creates new form PrintBill
+     */
     public PrintBill() {
         
-        super(Variables.title);
-        
-        Bill bill = Variables.bills.get(Variables.bills.size()-1);
-        
         Font fuente = new Font("helvetica", Font.PLAIN, 18);
-        Font fuenteTotal = new Font("helvetica", Font.PLAIN, 24);
         
-        number = new JLabel("Factura " + bill.getNumber());
-        number.setFont(fuente);
-        idUser = new JLabel("Documento No. " + bill.getUser().getIdNumber());
-        idUser.setFont(fuente);        
-        name = new JLabel("Nombre " + bill.getUser().getName());
-        name.setFont(fuente);
-                
-        list = new JLabel("<html>" + setList(bill.getList()) + "<hr></html>");
-        list.setFont(fuente);        
+        getBill = Variables.bills.get(Variables.bill);
         
-        total = new JLabel("Total: " + bill.getTotal());
-        total.setFont(fuenteTotal);
+        ImageIcon icono = new ImageIcon(getClass().getResource("/img/"+getBill.getUser().getImg()+".png"));
+        Image imagen = icono.getImage();
+        ImageIcon iconoEscalado = new ImageIcon (imagen.getScaledInstance(100,100,Image.SCALE_SMOOTH));
         
-        newBill = new JButton("Nueva Factura");
-        newBill.setBounds(5, 320,135,50);
-        newBill.setFont(fuente);
-        newBill.setBorder(BorderFactory.createEmptyBorder());
-        newBill.setBackground(new Color(0,150,136));
-        newBill.setForeground(Color.white);
-        newBill.addActionListener(new ButtonListener());  
+        ImageIcon icono2 = new ImageIcon(getClass().getResource("/img/"+getBill.getStore().getImgUrl()+".png"));
+        Image imagen2 = icono2.getImage();
+        ImageIcon iconoEscalado2 = new ImageIcon (imagen2.getScaledInstance(100,100,Image.SCALE_SMOOTH));
         
-        logout = new JButton("Salir");
-        logout.setBounds(150, 320,135,50);
-        logout.setFont(fuente);
-        logout.setBorder(BorderFactory.createEmptyBorder());
-        logout.setBackground(new Color(0,150,136));
-        logout.setForeground(Color.white);
-        logout.addActionListener(new ButtonListener()); 
+        String[][] listProduct = getBill.getList();
         
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBorder(new EmptyBorder(10, 10, 0, 10));
-        JScrollPane scroll = new JScrollPane();
+        this.listJTable = new String[getBill.getList().length][5];
         
-        panel.add(number);
-        panel.add(name);
-        panel.add(list);
-        panel.add(total);
+        for(int i=0; i < getBill.getList().length; i++) {
+            this.listJTable[i][0] = "" + listProduct[i][0];
+            this.listJTable[i][1] = listProduct[i][1];
+            this.listJTable[i][2] = "" + listProduct[i][2];
+            this.listJTable[i][3] = "" + listProduct[i][3];
+            this.listJTable[i][4] = "" + listProduct[i][4];
+        }  
         
-        scroll.setViewportView(panel);
-        scroll.setBounds(0,0,300,300);
+        cuadro = new DefaultTableModel(listJTable,nombreColumnas);
         
-        //Configuración del marco General        
+        initComponents();
+        
         Image icon = new ImageIcon(getClass().getResource("/img/cash-register.png")).getImage();
+        
         setIconImage(icon);
-        setLayout(null);
-        setSize(300,420);
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        add(scroll);
-        add(newBill);
-        add(logout);
+        
+        imgUser.setIcon(iconoEscalado);
+        imgStore.setIcon(iconoEscalado2);
+        nameUser.setText(getBill.getUser().getName());
+        numberUser.setText(""+getBill.getUser().getIdNumber());
+        adrresUser.setText(getBill.getUser().getAdress());
+        phoneUser.setText(getBill.getUser().getTelephone());
+        
+        nameStore.setText(getBill.getStore().getName());
+        nitStore.setText(getBill.getStore().getNit());
+        adrresStore.setText(getBill.getStore().getAdress());
+        phoneStore.setText(getBill.getStore().getTelephone());
+        number.setText("No. "+getBill.getNumber());
+        total.setText("Total: $"+getBill.getTotal());
+        
+        jButton6.setFont(fuente);
+        jButton6.setBorder(BorderFactory.createEmptyBorder());
+        jButton6.setBackground(new Color(0,150,136));
+        jButton6.setForeground(Color.white);
     }
-    
-    public String setList(String[][] data) {
-        
-        String text = "";
-        
-        for (int i=0; i < data.length; i++) {
-            text = text + data[i][1] + " - " + data[i][0] + " - " + data[i][3] + "<br>";
-        }
-        
-        return text;
-    }
-    
-    public class ButtonListener implements ActionListener {
-        
-        // Metodo para los eventos de los botones
-        @Override
-        public void actionPerformed(java.awt.event.ActionEvent e) {
-            
-            if (e.getSource() == logout) {
-                Variables.title = "Login";
-                Variables.img = "account";
-                MainFrame loginFrame = new MainFrame();
-                loginFrame.setVisible(true);
-                dispose();
-            
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        nameUser = new javax.swing.JLabel();
+        numberUser = new javax.swing.JLabel();
+        adrresUser = new javax.swing.JLabel();
+        phoneUser = new javax.swing.JLabel();
+        phoneStore = new javax.swing.JLabel();
+        adrresStore = new javax.swing.JLabel();
+        nitStore = new javax.swing.JLabel();
+        nameStore = new javax.swing.JLabel();
+        total = new javax.swing.JLabel();
+        imgStore = new javax.swing.JLabel();
+        imgUser = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        number = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Nombre:");
+
+        jLabel2.setText("Documento:");
+
+        jLabel3.setText("Dirección:");
+
+        jLabel4.setText("Telefono:");
+
+        jLabel5.setText("Nombre:");
+
+        jLabel6.setText("Nit:");
+
+        jLabel7.setText("Dirección:");
+
+        jLabel8.setText("Telefono:");
+
+        jTable1.setModel(cuadro);
+        jScrollPane1.setViewportView(jTable1);
+
+        nameUser.setText("jLabel9");
+
+        numberUser.setText("jLabel9");
+
+        adrresUser.setText("jLabel9");
+
+        phoneUser.setText("jLabel9");
+
+        phoneStore.setText("jLabel9");
+
+        adrresStore.setText("jLabel9");
+
+        nitStore.setText("jLabel9");
+
+        nameStore.setText("jLabel9");
+
+        total.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        total.setText("Total:");
+
+        jButton6.setText("Menu Principal");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
             }
-            else if (e.getSource() == newBill) {
-                Variables.title = "Generar Factura";
-                BillFrame billFrame = new BillFrame();
-                billFrame.setVisible(true);
-                dispose();
-            
-            } 
+        });
+
+        number.setText("jLabel9");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameUser, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(numberUser, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(adrresUser, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(phoneUser, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameStore, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nitStore, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(adrresStore, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(phoneStore, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(number, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(imgUser, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(imgStore, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122))
+                    .addComponent(jScrollPane1))
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(imgUser, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(imgStore, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(number, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                        .addGap(30, 30, 30)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel7)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel8))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1)
+                                .addComponent(nameUser))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2)
+                                .addComponent(numberUser))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(adrresUser))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(phoneUser))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nameStore)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nitStore)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(adrresStore)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(phoneStore)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        
+        Variables.title = Variables.cashiers.get(Variables.user).getName();
+        Variables.img = Variables.cashiers.get(Variables.user).getImg();
+        MainFrame userFrame = new MainFrame();
+        userFrame.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PrintBill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PrintBill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PrintBill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PrintBill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new PrintBill().setVisible(true);
+            }
+        });
     }
-    
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel adrresStore;
+    private javax.swing.JLabel adrresUser;
+    private javax.swing.JLabel imgStore;
+    private javax.swing.JLabel imgUser;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel nameStore;
+    private javax.swing.JLabel nameUser;
+    private javax.swing.JLabel nitStore;
+    private javax.swing.JLabel number;
+    private javax.swing.JLabel numberUser;
+    private javax.swing.JLabel phoneStore;
+    private javax.swing.JLabel phoneUser;
+    private javax.swing.JLabel total;
+    // End of variables declaration//GEN-END:variables
 }

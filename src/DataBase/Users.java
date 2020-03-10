@@ -10,6 +10,7 @@ import Model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,7 +28,7 @@ public class Users extends ConnectionDB {
         
         try {
             
-            openConnection();        
+            openConnection("Obtener Datos de Usuarios");        
             ps = getConnectionDB().prepareStatement("SELECT * FROM Users");
             response = ps.executeQuery();
             
@@ -59,7 +60,7 @@ public class Users extends ConnectionDB {
         
         try {
             
-            openConnection();        
+            openConnection("Buscar Usuario por ID");        
             ps = getConnectionDB().prepareStatement(sql);
             response = ps.executeQuery();
             
@@ -91,8 +92,8 @@ public class Users extends ConnectionDB {
         
         try {
             
-            openConnection();        
-            ps = getConnectionDB().prepareStatement(sql);
+            openConnection("Crear Usuario");        
+            ps = getConnectionDB().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             ps.setString(1, name);
             ps.setString(2, telephone);

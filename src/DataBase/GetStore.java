@@ -27,7 +27,7 @@ public class GetStore extends ConnectionDB {
         
         try {
             
-            openConnection();        
+            openConnection("Optener datos de la tienda");        
             ps = getConnectionDB().prepareStatement("SELECT * FROM Store");
             response = ps.executeQuery();
             
@@ -61,7 +61,7 @@ public class GetStore extends ConnectionDB {
         
         try {
             
-            openConnection();        
+            openConnection("Crear nueva tienda");        
             ps = getConnectionDB().prepareStatement(sql);
             
             ps.setString(1, name);

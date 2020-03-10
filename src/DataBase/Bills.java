@@ -25,8 +25,6 @@ public class Bills extends ConnectionDB {
     
     private PreparedStatement ps, psItem;
     private ResultSet response, responseProducts;
-    private ArrayList<ItemBill> listProduct;
-    
     
     //Metodo para consultar todos los usuarios en la DB
     public void getQuery() {
@@ -36,9 +34,9 @@ public class Bills extends ConnectionDB {
         
         try {
             
-            openConnection();
+            openConnection("Optener todas las Facturas");
             
-            listProduct = new ArrayList<>(); 
+            
             
             ps = getConnectionDB().prepareStatement(sql);
             
@@ -65,6 +63,8 @@ public class Bills extends ConnectionDB {
                 psItem = getConnectionDB().prepareStatement(sqlProducts + idBill);
                 
                 responseProducts = psItem.executeQuery();
+                
+                ArrayList<ItemBill> listProduct = new ArrayList<>(); 
                 
                 while (responseProducts.next()) {
                     
@@ -116,7 +116,7 @@ public class Bills extends ConnectionDB {
         
         try {
             
-            openConnection();     
+            openConnection("Crear Factura");     
             
             ps = getConnectionDB().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             

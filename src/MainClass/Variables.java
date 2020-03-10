@@ -22,6 +22,8 @@ import java.util.ArrayList;
 public class Variables {
     
     public static int user = 0;
+    public static int bill = 0;
+    public static int product = 0;
     public static String title = "Login";
     public static String img = "account";
     public static Store store;

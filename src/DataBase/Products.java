@@ -27,7 +27,7 @@ public class Products extends ConnectionDB {
         
         try {
             
-            openConnection();        
+            openConnection("Obtener Todos los Productos");        
             ps = getConnectionDB().prepareStatement("SELECT * FROM Products");
             response = ps.executeQuery();
             
@@ -53,11 +53,11 @@ public class Products extends ConnectionDB {
     
     public void SetData(String codigo, String name, int valorUnitario) {
         
-        String sql = "INSERT INTO Products (codigo, name, valorUnitario) VALUES (?,?,?,?,?);";
+        String sql = "INSERT INTO Products (codigo, name, valorUnitario) VALUES (?,?,?);";
         
         try {
             
-            openConnection();        
+            openConnection("Crear Producto");        
             ps = getConnectionDB().prepareStatement(sql);
             
             ps.setString(1, codigo);
@@ -67,6 +67,8 @@ public class Products extends ConnectionDB {
             int res = ps.executeUpdate();
             
             if(res > 0) {
+                
+                Variables.products.add(new Product(0, codigo, name, valorUnitario));                
                 JOptionPane.showMessageDialog(null, "Producto creado Correctamente");
             } else {
                 JOptionPane.showMessageDialog(null, "Producto No Creado");

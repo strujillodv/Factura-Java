@@ -27,7 +27,7 @@ public class ConnectionDB {
     }
 
     
-    public void openConnection() {
+    public void openConnection(String type) {
         
         try{
             
@@ -43,7 +43,7 @@ public class ConnectionDB {
             connectionDB = (Connection) DriverManager.getConnection(this.host, properties);
 
             if (connectionDB!=null){
-                System.out.println("Conexión a Base de Datos Establecida");
+                System.out.println("Conexión a Base de Datos Establecida "+type);
             }
         }catch(SQLException e){
             System.out.println("Error de MySQL: \n" + e);

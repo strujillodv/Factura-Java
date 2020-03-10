@@ -3,6 +3,7 @@ package View;
 
 import Model.Login;
 import MainClass.Variables;
+import Model.ProductsFrame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -141,7 +142,6 @@ public class MainFrame extends JFrame {
             add(titleName);
             add(newBill);
             add(bills);
-            add(users);
             add(products);
             add(logout);
             
@@ -173,6 +173,7 @@ public class MainFrame extends JFrame {
                 int response = login.loginUser();
                 
                 if (response >= 0) {
+                    Variables.user = response;
                     Variables.title = Variables.cashiers.get(response).getName();
                     Variables.img = Variables.cashiers.get(response).getImg();
                     
@@ -204,6 +205,24 @@ public class MainFrame extends JFrame {
                 dispose();
             
             } 
+            else if (e.getSource() == bills) {
+                BillsFrame billsFrame = new BillsFrame();
+                billsFrame.setVisible(true);
+                billsFrame.setLocationRelativeTo(null);
+                //Configuración del marco General
+                Image icon = new ImageIcon(getClass().getResource("/img/cash-register.png")).getImage();
+                billsFrame.setIconImage(icon);
+                dispose();
+                
+            }
+            else if( e.getSource() == products) {
+                
+                ProductsFrame pFrame = new ProductsFrame();
+                pFrame.setLocationRelativeTo(null);
+                pFrame.setVisible(true);
+                dispose();
+            
+            }
         }
      }
 }
