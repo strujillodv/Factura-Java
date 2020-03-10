@@ -200,7 +200,7 @@ public class UserFrame extends JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Users newUser = new Users();
-        newUser.SetData(nameUser.getText().trim(), telephone.getText(), adress.getText(), img, Variables.client.getIdUser());
+        newUser.SetData(nameUser.getText().trim(), telephone.getText(), adress.getText(), img, Integer.parseInt(idUserNumber.getText().trim()));
         
         if (Variables.client.getIdUser() == 0) {
             UserList userList = new UserList();
