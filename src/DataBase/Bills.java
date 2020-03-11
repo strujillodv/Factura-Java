@@ -106,9 +106,7 @@ public class Bills extends ConnectionDB {
             JOptionPane.showMessageDialog(null, "Error de MySQL: \n" + e);
         }
         
-    }
-    
-    
+    }  
     
     public void SetData(int number, int idUser, int idStore, String[][] list, int total) {
         
@@ -147,7 +145,6 @@ public class Bills extends ConnectionDB {
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error de MySQL: \n" + e);
         }
-        
     }
     
     public void setItemsBill(int idBill, String[][] list) {
@@ -191,5 +188,4 @@ public class Bills extends ConnectionDB {
                 JOptionPane.showMessageDialog(null, "Error de MySQL: \n" + e);
         }
     }
-    
 }

@@ -12,7 +12,20 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Documentos/NetBeansProjects/Factura/src/MainClass/Variables.java</file>
+            <file>file:/D:/Documentos/NetBeansProjects/Factura/src/Model/Bill.java</file>
+            <file>file:/D:/Documentos/NetBeansProjects/Factura/src/DataBase/ConnectionDB.java</file>
+            <file>file:/D:/Documentos/NetBeansProjects/Factura/src/Model/Cashier.java</file>
+            <file>file:/D:/Documentos/NetBeansProjects/Factura/src/DataBase/Bills.java</file>
+            <file>file:/D:/Documentos/NetBeansProjects/Factura/src/DataBase/GetStore.java</file>
+            <file>file:/D:/Documentos/NetBeansProjects/Factura/src/Model/Product.java</file>
             <file>file:/D:/Documentos/NetBeansProjects/Factura/src/MainClass/Main.java</file>
+            <file>file:/D:/Documentos/NetBeansProjects/Factura/src/Model/Store.java</file>
+            <file>file:/D:/Documentos/NetBeansProjects/Factura/src/View/BillFrame.java</file>
+            <file>file:/D:/Documentos/NetBeansProjects/Factura/src/MainClass/Data.java</file>
+            <file>file:/D:/Documentos/NetBeansProjects/Factura/src/Model/ItemBill.java</file>
+            <file>file:/D:/Documentos/NetBeansProjects/Factura/src/Model/User.java</file>
+            <file>file:/D:/Documentos/NetBeansProjects/Factura/src/Model/Login.java</file>
         </group>
     </open-files>
 </project-private>
