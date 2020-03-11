@@ -18,6 +18,14 @@ public class Bill {
     private final String[][] list;
     private final int total;
 
+    /**
+     *
+     * @param number
+     * @param user
+     * @param store
+     * @param list
+     * @param total
+     */
     public Bill(int number, User user, Store store, String[][] list, int total) {
         this.number = number;
         this.user = user;
@@ -26,22 +34,42 @@ public class Bill {
         this.total = total;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getNumber() {
         return number;
     }
 
+    /**
+     *
+     * @return
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     *
+     * @return
+     */
     public Store getStore() {
         return store;
     }
 
+    /**
+     *
+     * @return
+     */
     public String[][] getList() {
         return list;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTotal() {
         return total;
     }    

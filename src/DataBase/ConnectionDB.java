@@ -20,13 +20,13 @@ public class ConnectionDB {
     
     private Connection connectionDB = null;
 
+    
     public ConnectionDB() {
         this.host = "jdbc:mysql://db4free.net:3306/facturatest1234?serverTimezone=UTC";
         this.user = "adminfactura1234";
         this.password = "adminfactura1234";
     }
 
-    
     public void openConnection(String type) {
         
         try{
@@ -68,7 +68,7 @@ public class ConnectionDB {
         }
         
     }
-
+    
     public Connection getConnectionDB() {
         return connectionDB;
     }    

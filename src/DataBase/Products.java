@@ -22,7 +22,7 @@ public class Products extends ConnectionDB {
     private ResultSet response;
     
     
-    //Metodo para consultar todos los usuarios en la DB
+    //Metodo para consultar todos los productos en la DB
     public void getQuery() {
         
         try {
